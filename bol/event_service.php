@@ -635,7 +635,9 @@ final class EVENT_BOL_EventService
                 'title' => $title,
                 'eventUrl' => OW::getRouter()->urlForRoute('event.view', array('eventId' => $eventItem->getId())),
                 'imageSrc' => ( $eventItem->getImage() ? $this->generateImageUrl($eventItem->getImage(), true) : $this->generateDefaultImageUrl() ),
-                'imageTitle' => $title
+                'imageTitle' => $title,
+                'startTimeStamp' =>  date('Y-m-d H:i:s', $eventItem->startTimeStamp),
+                'location' => $eventItem->location
             );
         }
 

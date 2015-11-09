@@ -50,16 +50,40 @@ class EVENT_CTRL_Base extends OW_ActionController
 
     public function calendar()
     {
+        //$viewRenderer = OW_ViewRenderer::getInstance();
+        //this->setDevMode(true);
+
+        OW::getDocument()->addStyleSheet( OW::getPluginManager()->getPlugin('event')->getStaticCssUrl().'fullcalendar.min.css' );
+        OW::getDocument()->addStyleSheet( OW::getPluginManager()->getPlugin('event')->getStaticCssUrl().'fullcalendar.print.css' );
+        OW::getDocument()->addScript( OW::getPluginManager()->getPlugin('event')->getStaticJsUrl().'moment-with-locales.js', 'text/javascript', (-90) );
+        OW::getDocument()->addScript( OW::getPluginManager()->getPlugin('event')->getStaticJsUrl().'fullcalendar.min.js', 'text/javascript', (-90) );
+        OW::getDocument()->addScript( OW::getPluginManager()->getPlugin('event')->getStaticJsUrl().'calendar.js'  );
+
+
         $this->setPageTitle(OW::getLanguage()->text('event', 'calendar_page_title')); 
-        $this->setPageHeading(OW::getLanguage()->text('map', 'calendar_page_heading')); 
+        $this->setPageHeading(OW::getLanguage()->text('event', 'calendar_page_heading')); 
         $this->setPageHeadingIconClass('ow_ic_calendar');
 
-        $dateComponents = getdate();
 
-        $month = $dateComponents['mon'];                
-        $year = $dateComponents['year'];
+        $eventService = EVENT_BOL_EventService::getInstance();
+
+        $userEvents = $eventService->findUserEvents(OW::getUser()->getId(), 1);
+        $partEvents = $eventService->findUserParticipatedEvents(OW::getUser()->getId(), 1);
+        $pubEvents = $eventService->findPublicEvents(null, 1);
+
+        $date = getdate();
+
+        $month = $date['mon'];                
+        $year = $date['year'];
+
+
+
         $this->assign('month', $month);
         $this->assign('year', $year);
+        $this->assign('my_events', $eventService->getListingData($userEvents));
+        $this->assign('pub_events', $eventService->getListingData($pubEvents));
+        $this->assign('part_events', $eventService->getListingData($partEvents));
+
 
         OW::getNavigation()->activateMenuItem(OW_Navigation::MAIN, 'event', 'calendar_menu_item');
     }

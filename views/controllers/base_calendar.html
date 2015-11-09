@@ -1,4 +1,31 @@
-Calendar goes here
+<div id='calendar'></div>
 
-Месяц: {$month}
-Год: {$year}
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var events = [
+	{foreach from=$my_events key='key' item=event}
+	    {
+	    	title: '{$event.title}',
+	    	start: '{$event.startTimeStamp}',
+	    	url: '{$event.eventUrl}',
+	    },    	
+	{/foreach}
+		];
+
+
+	$('#calendar').fullCalendar({
+	    // put your options and callbacks here
+	    lang: 'ru',
+	    header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+	    timeFormat: 'H:mm',
+	    firstDay: 1,
+	    monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+	    events: events
+	});
+});
+</script>
