@@ -52,6 +52,16 @@ class EVENT_CTRL_Base extends OW_ActionController
     {
         $this->setPageTitle(OW::getLanguage()->text('event', 'calendar_page_title')); 
         $this->setPageHeading(OW::getLanguage()->text('map', 'calendar_page_heading')); 
+        $this->setPageHeadingIconClass('ow_ic_calendar');
+
+        $dateComponents = getdate();
+
+        $month = $dateComponents['mon'];                
+        $year = $dateComponents['year'];
+        $this->assign('month', $month);
+        $this->assign('year', $year);
+
+        OW::getNavigation()->activateMenuItem(OW_Navigation::MAIN, 'event', 'calendar_menu_item');
     }
 
     /**
