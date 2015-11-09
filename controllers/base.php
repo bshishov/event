@@ -47,6 +47,13 @@ class EVENT_CTRL_Base extends OW_ActionController
         $this->eventService = EVENT_BOL_EventService::getInstance();
     }
 
+
+    public function calendar()
+    {
+        $this->setPageTitle(OW::getLanguage()->text('event', 'calendar_page_title')); 
+        $this->setPageHeading(OW::getLanguage()->text('map', 'calendar_page_heading')); 
+    }
+
     /**
      * Add new event controller
      */

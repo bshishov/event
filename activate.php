@@ -30,6 +30,7 @@
  */
 
 OW::getNavigation()->addMenuItem(OW_Navigation::MAIN, 'event.main_menu_route', 'event', 'main_menu_item', OW_Navigation::VISIBLE_FOR_ALL);
+OW::getNavigation()->addMenuItem(OW_Navigation::MAIN, 'event.calendar', 'event', 'calendar_menu_item', OW_Navigation::VISIBLE_FOR_ALL);
 
 $widget = BOL_ComponentAdminService::getInstance()->addWidget('EVENT_CMP_UpcomingEvents', false);
 $placeWidget = BOL_ComponentAdminService::getInstance()->addWidgetToPlace($widget, BOL_ComponentAdminService::PLACE_INDEX);

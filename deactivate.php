@@ -29,6 +29,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 OW::getNavigation()->deleteMenuItem('event', 'main_menu_item');
+OW::getNavigation()->deleteMenuItem('event', 'calendar_menu_item');
 
 BOL_ComponentAdminService::getInstance()->deleteWidget('EVENT_CMP_UpcomingEvents');
 BOL_ComponentAdminService::getInstance()->deleteWidget('EVENT_CMP_ProfilePageWidget');
